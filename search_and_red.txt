@@ -1,0 +1,15 @@
+Sub Demo()
+    Dim rng As Range
+    Dim mMatches As Object, mMatch As Object
+    For Each rng In Range("E1:E300")
+        With CreateObject("VBSCRIPT.REGEXP")
+            .Global = True
+            .Pattern = "reqdate"
+            .IgnoreCase = True
+            Set mMatches = .Execute(rng.Text)
+            For Each mMatch In mMatches
+                rng.Characters(mMatch.FirstIndex + 1, 7).Font.ColorIndex = 3
+            Next
+        End With
+    Next
+End Sub
