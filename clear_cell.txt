@@ -1,0 +1,15 @@
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+    Dim cell As Range
+    Dim mMatches As Object, mMatch As Object
+    For Each cell In Range(Selection.Address)
+        With CreateObject("VBSCRIPT.REGEXP")
+            .Global = True
+            .Pattern = "Generated"
+            .IgnoreCase = True
+            Set mMatches = .Execute(cell.Text)
+            For Each mMatch In mMatches
+                cell.Clear 'cell.Delete is delete cell
+            Next
+        End With
+    Next
+End Sub
